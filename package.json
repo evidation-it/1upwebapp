@@ -67,7 +67,7 @@
     "serverless-domain-manager": "^3.2.2",
     "serverless-http": "^2.0.2",
     "serverless-vpc-discovery": "^1.0.13", 
-    "http-proxy-middleware": "^3.0.3"
+    "http-proxy-middleware": "^2.0.7"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.10.0",
