@@ -6,6 +6,8 @@ const cookieSession = require('cookie-session');
 const auth = require('./auth');
 const oneup = require('./oneup');
 const config = require('./config.json');
+const httpProxy = require('http-proxy-middleware');
+
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -14,11 +16,17 @@ const server = express();
 
 const rootUrl = config.baseURL
 
+const apiProxy = httpProxy.createProxyMiddleware({
+  target: rootUrl, // The target API URL
+  changeOrigin: true, // Change the origin of the request
+});
+
 app
   .prepare()
   .then(() => {
     server.use(bodyParser.urlencoded({ extended: false }));
     server.use(bodyParser.json());
+    server.use('', apiProxy);
     server.use(
       cookieSession({
         name: 'demoappsession',
