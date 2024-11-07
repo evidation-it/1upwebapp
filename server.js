@@ -76,7 +76,7 @@ app
       return handle(req, res);
     });
 
-    server.listen(8888, err => {
+    server.listen(3001, err => {
       if (err) throw err;
       console.log(`> Ready on "${config.baseURL}"`);
     });
