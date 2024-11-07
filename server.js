@@ -31,7 +31,6 @@ app
     server.use(
       auth.passwordless.acceptToken({ successRedirect: '/dashboard' }),
     );
-    server.use(rootUrl, app);
 
     server.post(
       '/sendtoken',
