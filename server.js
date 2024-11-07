@@ -15,10 +15,16 @@ const handle = app.getRequestHandler();
 const server = express();
 
 const rootUrl = config.baseURL
+const EVI_CF_ACCESS_CLIENT_ID = process.env.EVI_CF_ACCESS_CLIENT_ID;
+const EVI_CF_ACCESS_SECRET = process.env.EVI_CF_ACCESS_SECRET;
 
 const apiProxy = httpProxy.createProxyMiddleware({
   target: rootUrl, // The target API URL
   changeOrigin: true, // Change the origin of the request
+  onProxyReq: (proxyReq, req, res) => {
+    proxyReq.setHeader('CF-Access-Client-Id', EVI_CF_ACCESS_CLIENT_ID);
+    proxyReq.setHeader('CF-Access-Client-Secret', EVI_CF_ACCESS_SECRET);
+} 
 });
 
 app
