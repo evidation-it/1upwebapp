@@ -5,11 +5,14 @@ const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const auth = require('./auth');
 const oneup = require('./oneup');
+const config = require('./config.json');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const server = express();
+
+const rootUrl = config.baseURL
 
 app
   .prepare()
@@ -28,6 +31,7 @@ app
     server.use(
       auth.passwordless.acceptToken({ successRedirect: '/dashboard' }),
     );
+    server.use(rootUrl, app);
 
     server.post(
       '/sendtoken',
@@ -75,7 +79,7 @@ app
 
     server.listen(3000, err => {
       if (err) throw err;
-      console.log('> Ready on http://localhost:3000');
+      console.log(`> Ready on "${config.baseURL}"`);
     });
   })
   .catch(ex => {

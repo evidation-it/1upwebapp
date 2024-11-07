@@ -7,13 +7,19 @@ const ONEUP_DEMOWEBAPPLOCAL_CLIENTID =
   process.env.ONEUP_DEMOWEBAPPLOCAL_CLIENTID;
 const ONEUP_DEMOWEBAPPLOCAL_CLIENTSECRET =
   process.env.ONEUP_DEMOWEBAPPLOCAL_CLIENTSECRET;
+const EVI_CF_ACCESS_CLIENT_ID = process.env.EVI_CF_ACCESS_CLIENT_ID;
+const EVI_CF_ACCESS_SECRET = process.env.EVI_CF_ACCESS_SECRET;
+
 let accessTokenCache = {};
 const ROOT_API_URL = `https://api.1up.health`;
 const USER_API_URL = `https://api.1up.health`;
 const FHIR_API_URL = `https://api.1up.health/fhir`;
 
+
+
 function getTokenFromAuthCode(code, callback) {
   var postUrl = `${ROOT_API_URL}/fhir/oauth2/token?client_id=${ONEUP_DEMOWEBAPPLOCAL_CLIENTID}&client_secret=${ONEUP_DEMOWEBAPPLOCAL_CLIENTSECRET}&code=${code}&grant_type=authorization_code`;
+
 
   request.post(postUrl, function(error, response, body) {
     if (error) {
